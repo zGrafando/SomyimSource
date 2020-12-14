@@ -1,0 +1,337 @@
+<DOCTYPE! html>    
+    <html lang="de-CH">
+        <head>
+            <meta charset="utf-8">
+            <title>Memory of Somyim</title>
+            <link rel="stylesheet" href="styles.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+            <style>
+                a{ text-decoration: none;
+                }
+                div{    text-align: center;
+                        margin: auto;
+                }
+                
+                .FeedTopLayout1 {
+                    width: 100%;
+                    height: 300px;
+                    display: block;
+                    margin: auto;
+                    text-align: center;
+                }
+                
+                .Tang {
+                    font-size: 190px;
+                    color: #FFFFFF;
+                    text-align: center;
+                    font-family: 'Tangerine', serif;
+                }
+                
+                .tin {
+                    font-family: 'Tangerine', serif;
+                }
+                .FeedTopOrange {
+                    font-family: 'Tangerine', serif;
+                    font-size: 190px;
+                    color: #FFA07A;
+                    color: #FF7F50;
+                }
+                .dd{
+                    font-size: 160px;
+                    color: #FFFFFF;
+                    font-family: 'Tangerine', serif;
+                }
+            </style>
+            
+        </head>
+<?php
+    if(!isset($_COOKIE['PHPSESSID'])){
+        session_start();    //start the session
+    }
+    if(isset($_POST['Termin1']) || isset($_POST['Termin2']) || isset($_POST['Termin3']) || isset($_POST['Termin4']) || isset($_POST['Termin5'])){
+    
+        $dbServername = "localhost";
+        $dbUsername = "zGrafando";
+        $dbPassword = "Nbiwe!12";
+        $dbName = "SomyimData";
+        $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+        if ($conn-> connect_error){
+            die("Connection to Database failed: ".$conn -> connect_error);
+        }
+        if(isset($_SESSION['LoginEmail'])){
+            $QueryEmail = $_SESSION['LoginEmail'];
+        }
+        $StagingQuery = $conn->prepare("SELECT KundenId FROM Kundendaten WHERE KundenEmail = '$QueryEmail'");
+        $StagingQuery->execute();
+        $r = $StagingQuery->get_result();
+        $result = $r->fetch_array(MYSQLI_ASSOC);
+        $CustId = $result['KundenId'];
+        
+        if(isset($_SESSION['WantedMassagetype'])){
+            $QueryMass = $_SESSION['WantedMassagetype'];
+        }
+        $RevealingQuery = $conn->prepare("SELECT MassagenId FROM Massagearten WHERE Massagearten = '$QueryMass'");
+        $RevealingQuery->execute();
+        $r1 = $RevealingQuery->get_result();
+        $result1 = $r1->fetch_array(MYSQLI_ASSOC);
+        $MassId = $result1['MassagenId'];
+        
+        $FormingQuery = $conn->prepare("INSERT INTO Buchung(Kunde, Massageart) VALUES('$CustId', '$MassId')");
+        $FormingQuery->execute();
+        $SearchingQuery = $conn->prepare("SELECT BuchungId FROM Buchung WHERE Kunde = '$CustId' AND Massageart = '$MassId'");
+        $SearchingQuery->execute();
+        $r2 = $SearchingQuery->get_result();
+        $result2 = $r2->fetch_array(MYSQLI_ASSOC);
+        $BuchungsId = $result2['BuchungId']; 
+        
+        if(isset($_SESSION['BookedDate'])){
+            $Qdate = $_SESSION['BookedDate'];
+        }
+        
+        if(isset($_POST['Termin1'])){
+            $BookingQuery = $conn->prepare("INSERT INTO Termin(T1) VALUES('$BuchungsId') WHERE Datum = '$Qdate'");
+        }else{
+            if(isset($_POST['Termin2'])){
+                $BookingQuery = $conn->prepare("INSERT INTO Termin(T2) VALUES('$BuchungsId') WHERE Datum = '$Qdate'");
+            }else{
+                if(isset($_POST['Termin3'])){
+                    $BookingQuery = $conn->prepare("INSERT INTO Termin(T3) VALUES('$BuchungsId') WHERE Datum = '$Qdate'");
+                }else{
+                    if(isset($_POST['Termin4'])){
+                        $BookingQuery = $conn->prepare("INSERT INTO Termin(T4) VALUES('$BuchungsId') WHERE Datum = '$Qdate'");
+                    }else{
+                        if(isset($_POST['Termin5'])){
+                            $BookingQuery = $conn->prepare("INSERT INTO Termin(T5) VALUES('$BuchungsId') WHERE Datum = '$Qdate'");
+                        }
+                    }
+                }
+            }
+        }
+        
+        $BookingQuery->execute();
+        mysqli_close($conn);
+    }
+?>
+        <body class="BodyBackground">
+            <section class="titleSectionBackground">
+                <div id="Titelsequence" class="titlesequenceTop">
+                    <a href="somyim.html" style="text-decoration: none"><p class="dd">Somyim</p></a>
+                </div>
+
+                <nav id="Navbar" class="Navigation">
+                    <ul>
+                        <li><a href="UnsereThaimassage.html" style="text-decoration: none">About</a></li>
+                        <li><a href="SomyimServices.html" style="text-decoration: none">Services</a></li>
+                        <li><a href="SomyimContact.html" style="text-decoration: none">Kontakt</a></li>
+                        <li><a href="SomyimBooking.php" style="text-decoration: none">Booking</a></li>
+                        <li class="Border"><a href="SomyimGallery.php" style="text-decoration: none">Gallery</a></li>
+                    </ul>
+                </nav>
+            </section>
+
+            <script>
+                window.onscroll = function() {ChangeNavigationAndTitle};
+                
+                var navbar = document.getElementById("Navbar");
+                var RickStick = Navbar.offsetTop;
+                
+                function ChangeNavigationAndTitle() {
+                    if (window.pageYOffset >= RickStick){
+                        Navbar.classList.add("sticky")
+                        Navbar.classList.remove("titlesequenceTop")
+                        Navbar.classList.add("titlesequenceScroll")
+                    }
+                    else{
+                        Navbar.classList.remove("sticky")
+                        Navbar.classList.remove("titlesequenceScroll")
+                        Navbar.classList.add("titlesequenceTop")
+                    }
+                    
+                    
+                }
+            </script>
+            
+            <section id="Feed" class="FeedSection">
+                <div class="FeedPicBackground">
+                    <div class="smth">
+                        <img src="images/OrchidPedals.jpg" alt="Titelbild" class="FeedPic">
+                    </div>
+                </div>
+            </section^>
+            
+                <section id="FeedContent" class="FeedTopContainer">
+                    <div id="FeedTopTitleDivision" class="FeedTopDivision">
+                        <table class="FeedTopBackground">
+                            <tr class="FeedTopLayout1">
+                                <td class="Tang"><em class="tin">Memory</em> <em class="FeedTopOrange">of</em> <em class="tin">Somyim</em></td>
+                            </tr>
+                            <tr class="FeedTopLayout2">
+                                <td class="FeedTopWhiteLayout2">Thai Massage Boutique Spa </br>
+                                Zürich Horgen</td>
+                            </tr>
+                        </table> 
+                    </div>
+                    
+                    <div id="FeedQuickLink" class="FeedQuickLinkDivision">
+                        <p class="FeedQuickLinkDivisionParagraph"><a href="SoyimBooking" style="text-decoration: none">Click here for online booking</a></p>
+                    </div>
+                    
+                    <div class="FeedPicDivision">
+                        <img src="images/Interior.jpg" alt="Titelbild" class="FeedPicOne">
+                    </div>
+                    
+                    <div class="FeedPicDivision">
+                        <img src="images/Interior2.jpg" alt="Titelbild" class="FeedPicOne">
+                    </div>
+                    
+                    <div class="FeedTextDivision">
+                        <p><strong>Thai Massage Boutique Spa - Zürich Horgen<br>
+                        Somyim / Herzlich Willkommen</strong></p>
+                    </div>
+                    
+                    <div class="FeedKredationDivision">
+                        <p><strong>Memory of Somyim - where quality service meets happy customer</strong></p>
+                        <p>Wir bieten höchste Service- und Massagequalität</p>
+                        <p class="FeedKredationDivisionParagraph">Image Film - hier drücken START</p>
+                    </div>
+                    
+                    <div class="FeedPicOne">
+                        <img src="images/Orchid.jpg" alt="Titelbild" class="FeedPicOne">
+                    </div>
+                    
+                    <div class="FeedOpeningHoursDivision">
+                        <p><strong>Name des Studios</strong></p>
+                        <p>Memory of Somyim - Beaty Villa Horgen - Aktuelle Adresse</p>
+                        <p><strong>Öffnungszeiten:</strong></p>
+                        <p>Montag - Samstag 10:00 - 21:00<br>
+                        Sonntag 12:00 - 21:00<br>
+                        An Ostern geöffnet!<br>
+                        Gratis Parkpätze vorhanden
+                        Reservation:<a href="SomyimBooking" style="text-decoration: none">Online</a>/oder Telefon: 079 751 3342 / <a href="SomyimContact" style="text-decoration: none">Email</a>
+                        <p></p>
+                        
+                        <img src="images/Exterior.jpg" alt="Titelbild" class="FeedPicOne">                   
+                    </div>
+                    
+                    <div class="FeedCustomerFeedbackDivision">
+                        <p><strong>Was Kunden über Memory of Somyim schreiben</strong></p>
+                        <p>Auf den folgenden Online Portalen können Sie lesen, was Kunden über Memory of Siam schreiben: <a href="" style="text-decoration: none">GooglePlus</a>,<a href="" style="text-decoration: none">Tripadvisor</a>
+                        ,<a href="" style="text-decoration: none">Facebook</a>und<a href="" style="text-decoration: none">Zurinet</a>.</p>
+                        <p>Mitbegründer von Girlfriendsguide.ch schreibt; nach einem Besuch im Juli 2018 "Memory of Somyim is a slice of life in a nice and quiet suburb of
+                            Zürich. I was feeling achy while trying to get over a summer cold and was so happy that the spa was able to accommodate me for a spontaneous thai massage.
+                            It was exactly what I needed to feel better! I have been fortunate to receive messages in Thailand before and the therapists in Horgen are authentic....
+                            my 90 - minute massage released so much tension and I feld incredibly better afterwards. I will definitely return!"
+                        </p>
+                    </div>
+                    
+                    <div class="FeedDescriptionDivision">
+                        <p><strong>Wir sorgen für Erholung</strong></p>
+                        <p>
+                            Sehnen Sie sich nach einer Wellness / Thaimassage in Zürich, haben Sie bei uns die Qual der Wahl. Sie können aus einem reichhaltigen Massageangebot
+                            auswählen. Mit dem "Antistress" bieten wir Ihnen eine praktische "Massage to go". In 30 Minuten können Sie Ihren Alltag entschluenigen und für den
+                            Rest des Tages neue Energie tanken. Benötigen Sie eine grössere Pause, können Sie unsere "Memory after Work" in Anspruch nehmen. Auch sie wird von uns 
+                            als Wellness Massage in Zürich angeboten und dauert zwei Stunden. Freuen sie sich nach dem Welcome Drink, inklusive Fussbad auf ein umfassendes Wellness-Erlebnis.
+                            Dies nur zwei Beispiele, welche aus dem Angebotskatalog stammen. Das gesamte Serviceangebot können Sie unter <a href="SomyimServices">Angebot</a> herunterladen.
+                        </p>
+                        <p>
+                            Reservieren Sie noch heute Ihre persönliche Massage an einem unserer zwei Standorten un überzeugen Sie sich von der erstklassigen Service- Massagequalität
+                        </p>
+                        
+                        <img src="images/Shrine.jpg" alt="Titelbild" class="FeedPicOne"> 
+                    </div>
+                    
+                    <div class="FeedPersuasionDivision">
+                        <p><strong>Studio Ambiente</strong></p>
+                        <p>
+                            Wir legen in unseren Wellness Oasen grössten Wert auf ein behagliches un gemütliches Ambiente. Angelehnt an den Buddhismus<br>
+                            und die typisch thailändische Kultur, sind so auch unsere Wellnessstudios eingerichtet.
+                        </p>
+                    </div>
+                    
+                    <div class="FeedPersuasionDivision">
+                        <p><strong>Nehmen Sie sich Zeit für sich</strong></p>
+                        <p>
+                            Der Alltag wird für immer mehr Menschen zur stressigen Herausforderung, die sich oft nur in Überanstrengung bewältigen lässt.<br>
+                            Körper und Geist werden stark beansprucht und der Stress hinterlässt an den eigenen Energiereserven seine Spuren. Möchten Sie<br>
+                            neue Energie tanken und ein wenig Abstand vom Alltag gewinnen, dann sind Sie bei uns genau richtig. In unseren zwei<br>
+                            Wellnessoasen in Zürich Horgen können Sie bei einer Massage den Alltag hinter sich lassen. Entspannen Sie sich in friedlicher<br>
+                            Umgebung und lassen Sie ihre Seele baumeln. Überzeugen Sie sich selber von unserer Topqualität und dem breiten Angebot an<br>
+                            Wellness-, Gesundheitsmassagen, wie auch Schmerztherapien.
+                        </p>
+                    </div>
+                    
+                    <div class="FeedAngebotDivision">
+                        <p><strong>Therapie / Massageangebot</strong></p>
+                        <p>
+                            Sehnen Sie sich nach einer Wellness / Thaimassage in Zürich, haben Sie bei uns die Qual der Wahl. Sie können aus<br> 
+                            einem reichhaltigen Massageangebot auswählen. Mit dem "Lunch Break" beiten wir Ihnen eine praktische "Massage to go".In 30<br>
+                            Minuten können Sie Ihren Alltag entschluenigen und für den Rest des Tages neue Energie tanken. Benötigen Sie eine grössere Pause,<br>
+                            können Sie unsere "Memory after Work" in Anspruch nehmen. Auch sie wird von uns als Wellness Massage in Zürich angeboten und<br>
+                            dauert zwei Stunden. Freuen Sie sich nach dem Welcome Drink, inklusive Fussbad auf ein umfassendes Wellness-Erlebnis. Dies nur<br>
+                            zwei Beispiele, welche aus dem Angebotskatalog stammen.
+                        </p>
+                        <p>
+                            Reservieren Sie noch heute Ihre persönliche Massage und überzeugen Sie sich von der erstklassigen Qualität.
+                        </p>
+                    </div>
+                    
+                    <div class="FeedKundenProgrammDivision">
+                        <p><strong>Kundenprogramm</strong></p>
+                        <p>
+                            Seit Beginn 2018 haben wir das Kundenprogramm mit Points. Bei jedem Besuch können Sie Punkte mit der App<br> 
+                            von Poinz sammeln. Bereits nach dem 7ten Besuch, erhalten Sie 50% Rabatt!
+                        </p>
+                        <img src="images/Roses.jpg" alt="Titelbild" class="FeedPicOne"> 
+                    </div>
+                    
+                    <div class="FeedFirmenPartnerProgrammDivision"> 
+                        <p><strong>Firmen Partner Programm</strong></p>
+                        <p>
+                            Werden Sie Memory of Siam Partner mit Ihrer Firma. Dies ist kostenlos, Ihre Angestellten Profitieren von reduziertem Preis!<br>
+                            Kontaktieren Sie uns unter <a href="SomyimContact" style="text-decoration: none">KONTAKT</a>.
+                        </p>
+                    </div>
+                    
+                    <div class="FeedMemoryMitgliedDivision">
+                        <p><strong>Werden Sie exklusiv Mitglied der Memory of Somyim Zürich Gmbh.</strong></p>
+                        <p>
+                            Unsere exklusive Mitgliederkarte, für generelle Vergünstigung (z.B. ganzes Jahr -10%), wie auch weitere Vorteile. Werden Sie jetzt<br>
+                            Memory of Somyim Mitglied! Die Memberschipkare ist zum Preis von 100CHF bei uns zu beziehen. (Die ganze Familie profitiert von der<br>
+                            Vergünstigung, sofern alle an der gleichen Adresse wohnen).
+                        </p>
+                        <img src="images/Spice.jpg" alt="Titelbild" class="FeedPicOne">
+                    </div>
+                    
+                    <div class="FeedWellnessShopDivision">
+                        <p><strong>Wellness Shop</strong></p>
+                        <p>
+                            Bringen Sie Thailand zu sich nach Hause und verwöhnen Sie ihre ganze Familie mit unsere auf natürlicher Basis hergestellten<br>
+                            Wellness-Produkten aus Thailand. Erhältilich im Shop am Empfang.
+                        </p>
+                        <img src="images/Candle.jpg" alt="Titelbild" class="FeedPicOne">
+                    </div>
+                    
+                    <div class="FeedGutscheinDivision">
+                        <p><strong>Gutschein (kann sofort online erworben werden)</strong></p>
+                        <p>
+                            Für jeden Anlass, sei es ein Geburtstag, Weihnachten, Jahrestag oder sonst eine Festlichkeit, ein Geschenkgutschein von Memory of<br>
+                            Somyim kommt immer gut an. Drücken Sie auf <a href="" style="text-decoration: none">Gutschein</a> und finden Sie alle Details zum Erwerb eine Geschenkgutscheins. Gutschein<br>
+                            online kaufen und sofort erwerben <a href="" style="text-decoration: none">Hier drücken</a>. Gutscheine auch erhältilich im Shop and der Florastrasse 47 - 8008 Zürich.
+                        </p>
+                        <img src="images/Exterior3.jpg" alt="Titelbild" class="FeedPicOne">
+                    </div>
+                    
+                    <div class="FeedFooterDivision">
+                        <p class="FeedFooterDivisionParagraph"><em>Memory <span class="FeedFooterDivisionParagraphSpan">of</span> 
+                        Siam - where quality service meets happy customer</em></p>
+                    </div>
+                    
+                </section>
+                
+            <section>
+            
+            
+            </section>
+            
+        </body>
+    </html>

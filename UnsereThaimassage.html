@@ -1,0 +1,146 @@
+<DOCTYPE! html>    
+    <html lang="de-CH">
+        <head>
+            <meta charset="utf-8">
+            <title>Memory of Somyim</title>
+            <link rel="stylesheet" href="styles.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+            <style>
+                a{ text-decoration: none;
+                }
+                div{    text-align: center;
+                        margin: auto;
+                }
+                
+                .FeedTopLayout1 {
+                    width: 100%;
+                    height: 300px;
+                    display: block;
+                    margin: auto;
+                    text-align: center;
+                }
+                
+                .Tang {
+                    font-size: 190px;
+                    color: #FFFFFF;
+                    text-align: center;
+                    font-family: 'Tangerine', serif;
+                }
+                
+                .tin {
+                    font-family: 'Tangerine', serif;
+                }
+                .FeedTopOrange {
+                    font-family: 'Tangerine', serif;
+                    font-size: 190px;
+                    color: #FFA07A;
+                    color: #FF7F50;
+                }
+                .dd{
+                    font-size: 160px;
+                    color: #FFFFFF;
+                    font-family: 'Tangerine', serif;
+                }
+            </style>
+            
+        </head>
+        <body class="BodyBackground">
+            <section class="titleSectionBackground">
+                <div id="Titelsequence" class="titlesequenceTop">
+                    <a href="somyim.html" style="text-decoration: none"><p class="dd">Somyim</p></a>
+                </div>
+
+                <nav id="Navbar" class="Navigation">
+                    <ul>
+                        <li><a href="UnsereThaimassage.html" style="text-decoration: none">About</a></li>
+                        <li><a href="SomyimServices.html" style="text-decoration: none">Services</a></li>
+                        <li><a href="SomyimContact.html" style="text-decoration: none">Kontakt</a></li>
+                        <li><a href="SomyimBooking.php" style="text-decoration: none">Booking</a></li>
+                        <li class="Border"><a href="SomyimGallery.php" style="text-decoration: none">Gallery</a></li>
+                    </ul>
+                </nav>
+            </section>
+
+            <script>
+                window.onscroll = function() {ChangeNavigationAndTitle};
+                
+                var navbar = document.getElementById("Navbar");
+                var RickStick = Navbar.offsetTop;
+                
+                function ChangeNavigationAndTitle() {
+                    if (window.pageYOffset >= RickStick){
+                        Navbar.classList.add("sticky")
+                        Navbar.classList.remove("titlesequenceTop")
+                        Navbar.classList.add("titlesequenceScroll")
+                    }
+                    else{
+                        Navbar.classList.remove("sticky")
+                        Navbar.classList.remove("titlesequenceScroll")
+                        Navbar.classList.add("titlesequenceTop")
+                    }
+                    
+                    
+                }
+            </script>
+            
+            
+            <section class="FeedTopContainer">
+                <div>
+                    <p class="UTSectionTitleParagraph"> == Thaimassage & Tradition == </p>
+                    <img src="logo/wheel-17.jpg" alt="Logo" style="width: 200px; height:200px; margin-bottom: 30px;">
+                </div>
+                <div class="UTContent" style="background-color: #FFFFFF; margin-bottom: 10px;">
+                    <p class="UTContentParagraph">
+                        Die Thaimassage ist eine uralte Massage, mit einem erstaunlichen Alter von über 2500 Jahren.
+                    </p>
+                </div>
+                <div>
+                    <img src="images/Beds2.jpg" alt="Massagetisch" class="FeedPicOne" style="height: 1200px;" >
+                </div>
+                <div class="UTContent">
+                    <p class="UTContentParagraph">
+                        Thaimassagen sind eine Verbindung aus Akupressur, Dehnung und Meditation. In ihrer Ausserordentlichkeit folgt sie gewissen
+                        Energiebahnen(wie aus den Sen Lehren) mit zärtlichen Bewegungen, welche die innere Kraft und Energie aktiviert 
+                        und das eigene Bewusstsein zum Zustand der Harmonie zurückführt.
+                    </p>                   
+                </div>
+                <div>
+                    <img src="images/Shrine.jpg" alt="Massagetisch" style="postition: relative; margin: auto; max-width:65%;">
+                </div>
+
+                <div class="FeedPersuasionDivision">
+                    <p><strong>Nehmen Sie sich Zeit für sich</strong></p>
+                    <p>
+                        Der Alltag wird für immer mehr Menschen zur stressigen Herausforderung, die sich oft nur in Überanstrengung bewältigen lässt.<br>
+                        Körper und Geist werden stark beansprucht und der Stress hinterlässt an den eigenen Energiereserven seine Spuren. Möchten Sie<br>
+                        neue Energie tanken und ein wenig Abstand vom Alltag gewinnen, dann sind Sie bei uns genau richtig. In unseren zwei<br>
+                        Wellnessoasen in Zürich Horgen können Sie bei einer Massage den Alltag hinter sich lassen. Entspannen Sie sich in friedlicher<br>
+                        Umgebung und lassen Sie ihre Seele baumeln. Überzeugen Sie sich selber von unserer Topqualität und dem breiten Angebot an<br>
+                        Wellness-, Gesundheitsmassagen, wie auch Schmerztherapien.
+                    </p>
+                </div>
+            
+                <div class="FeedWellnessShopDivision">
+                    <p><strong>Wellness Shop</strong></p>
+                    <p>
+                        Bringen Sie Thailand zu sich nach Hause und verwöhnen Sie ihre ganze Familie mit unsere auf natürlicher Basis hergestellten<br>
+                        Wellness-Produkten aus Thailand. Erhältilich im Shop am Empfang.
+                    </p>
+                    <img src="images/Candle.jpg" alt="Titelbild" class="FeedPicOne">
+                </div>
+                
+                <div class="FeedGutscheinDivision">
+                    <p><strong>Gutschein (kann sofort online erworben werden)</strong></p>
+                    <p>
+                        Für jeden Anlass, sei es ein Geburtstag, Weihnachten, Jahrestag oder sonst eine Festlichkeit, ein Geschenkgutschein von Memory of<br>
+                        Somyim kommt immer gut an. Drücken Sie auf <a href="" style="text-decoration: none">Gutschein</a> und finden Sie alle Details zum Erwerb eine Geschenkgutscheins. Gutschein<br>
+                        online kaufen und sofort erwerben <a href="" style="text-decoration: none">Hier drücken</a>. Gutscheine auch erhältilich im Shop and der Florastrasse 47 - 8008 Zürich.
+                    </p>
+                    <img src="images/Exterior3.jpg" alt="Titelbild" class="FeedPicOne">
+                </div>
+                    
+            </section>
+
+            
+        </body>
+    </html>

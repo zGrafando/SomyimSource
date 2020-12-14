@@ -1,0 +1,327 @@
+<?php
+    if(!isset($_COOKIE['PHPSESSID'])){
+        session_start();    //start the session
+    }
+    
+    
+        
+    if(isset($POST['subm1'])){
+         
+    
+            if(isset($_POST['Password']) && !empty($_POST['Password']) && isset($_POST['E-mail']) && !empty($_POST['E-mail'])){
+
+                    if(isset($_POST['E-mail']) && !empty($_POST['E-mail'])){
+                        $_SESSION['LoginEmail'] = htmlentities($_POST['E-mail']);
+                    }
+                    if(isset($_POST['Password']) && !empty($_POST['Password'])){
+                        $_SESSION['LoginPassword'] = $_POST['Password'];
+                        $pw = $_POST['Password'];
+                    }
+                    if(isset($_POST['SavePassword'])){
+                        $_SESSION['PassSave'] = $_POST['SavePassword'];
+                    }
+                
+                    $dbServername = "localhost";
+                    $dbUsername = "zGrafando";
+                    $dbPassword = "Nbiwe!12";
+                    $dbName = "SomyimData";
+                
+                    $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+                
+                    if ($conn -> connect_error){
+                        die("Connection to Database failed: ". $conn -> connect_error);
+                    }
+                    $EmailForQuery = filter_var($_POST['E-mail'], FILTER_SANITIZE_EMAIL);
+                    $query = $conn->prepare("SELECT * FROM Kundendaten WHERE KundenEmail = '$EmailExistsQuerry' "); 
+                    $query->execute();
+                    $r = $query->get_result(); 
+                    $result = $r->fetch_array(MYSQLI_ASSOC);
+                    mysqli_close($conn); 
+                
+                    
+                    if(isset($result)){ 
+                        
+                        
+                        if (password_verify($pw, $result)){
+                                
+    ?>
+                            <body class="BodyBackground" style="max-height: 600px;">
+                                <section class="titleSectionBackground" style="margin-bottom: 0px;">
+                                    <div id="Titelsequence" class="titlesequenceTop">
+                                        <a href="somyim.html" style="text-decoration: none"><p class="dd">Somyim</p></a>
+                                        <p></p>
+                                    </div>
+
+                                    <nav id="Navbar" class="Navigation" style="margin-bottom: 0px;">
+                                        <ul>
+                                            <li><a href="UnsereThaimassage.html" style="text-decoration: none">About</a></li>
+                                            <li><a href="SomyimServices.html" style="text-decoration: none">Services</a></li>
+                                            <li><a href="SomyimContact.html" style="text-decoration: none">Kontakt</a></li>
+                                            <li><a href="SomyimBooking.php" style="text-decoration: none">Booking</a></li>
+                                            <li class="Border"><a href="SomyimGallery.php" style="text-decoration: none">Gallery</a></li>
+                                        </ul>
+                                    </nav>
+                                </section>
+                                
+                                <section class="FeedTopContainer" style="margin-top: 0px;">
+                                    <div style="margin-bottom: 0px;">
+                                        <p class="UTSectionTitleParagraph" style="margin-top: 0px;"> == Booking == </p>
+                                        <img src="logo/wheel-17.jpg" alt="Logo" style="width: 200px; height:200px;  margin-bottom: 30px;">
+                                    </div>
+                                    <div class="UTContent" style="background-color: #FFFFFF; margin-bottom: 10px; margin-top: 0;">
+                                        <p class="UTContentParagraph">
+                                            Erreichen Sie uns rund um die Uhr, per E-mail oder Telefon.
+                                        </p>
+                                    </div>
+                                </section>
+                
+                                <section class="UTContent">
+                                    <div>
+                                        <form action="BookingKalendar.php" method="Post" id="Masgtypes">
+                                        
+                                            <label for="masgtypes">Wählen sie ihr bevorzugtes Angebot aus:</label>
+                                            <select form="Masgtypes" id="masgtypes" name="Massageart">
+                                                <option value="Klassische Thaimassage">Klassische Thaimassage</option>
+                                                <option value="Aroma-öl Massage">Aroma-öl Massage</option>
+                                                <option value="Fuss Massage">Fuss Massage</option>
+                                                <option value="Schulter Massage">Schulter Massage</option>
+                                                <option value="Sport Massage">Sport Massage</option>
+                                                <option value="Hot-stone Massage">"Hot-stone" Massage</option>
+                                                <option value="Kräuterstempel Massage">Kräuterstempel Massage</option>
+                                            </select>
+                                            
+                                            <input type="submit" name="SendType" id="sub" Value="Weiter">
+                                        
+                                        </form>
+                                    </div>
+                                </section>
+                            </body>
+                         
+    <?php                    
+                        }
+                        else{
+    ?>
+                        <div id="Login" class="tabcontent">
+                            <form action="SomyimBooking.php" method="Post">
+                                
+                                <div class="DivideConc">
+                                    <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                        <label for="username" style="margin-bottom: 10px;"> E-mail: </label>                      
+                                        <label for="pw" style="margin-bottom: 10px;"> Password: </label>
+                                    </p>
+                                    
+                                    <p class="FormDivide" style="justify-content: center;">
+    <?php
+                            if(isset($_SESSION['LoginEmail'])){
+                                $SessionEmail = $_SESSION['LoginEmail'];
+                                 echo"<input type='text' name='E-mail' id='username' value=$SessionEmail style='margin-bottom: 10px;'> ";
+                            }
+                            else{
+                                echo"<input type='text' name='E-mail' id='username' style='margin-bottom: 10px;'> ";
+                            }
+                            if(isset($_SESSION['PassSave'])){
+                                if (isset($_SESSION['LoginPassword'])){
+                                    $TempPassw = $_SESSION['LoginPassword'];
+                                    echo" <input type='password' id='pw' name='Password' value=$TempPassw style='margin-bottom: 10px;'> ";
+                                }
+                                else{
+                                    echo" <input type='password' id='pw' name='Password' style='margin-bottom: 10px;'> ";
+                                }
+                            }
+                            else{
+                                echo" <input type='password' id='pw' name='Password' style='margin-bottom: 10px;'> ";
+                            }
+    ?>
+                                </p>
+                            </div>
+                            <div>
+    <?php
+                            if(isset($_SESSION['PassSave'])){
+                                echo"
+                                    <label for='savePW'>Would you like to save you Password?</label>
+                                    <input type='radiobutton' id='savePW' name='SavePassword' value='SavePassword' checked>
+                                ";
+                            }
+                            else{
+                                echo"
+                                <label for='savePW'>Would you like to save you Password?</label>
+                                <input type='radiobutton' id='savePW' name='SavePassword' value='SavePassword'>
+                                ";
+                            }
+    ?>
+                            </div>
+
+                                <div>
+                                    <input type="submit" Value="Login" name="subm1" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                </div>
+                                
+                                <div>
+                                    <p onclick="openDirectory(event, 'Register', 'FirstPage')"> Register -> </p>
+                                </div>
+                                
+                                <div>
+                                    <a href=""><p> Passwort vergessen? -> </p></a>
+                                </div>
+                                    
+                            
+                            </form>
+                        </div>
+    <?php
+                            
+                        }
+                    }
+                    else{
+    ?>
+                                        
+                                        <div id="Login" class="tabcontent">
+                                            <form action="SomyimBooking.php" method="Post">
+                                                
+                                                <div class="DivideConc">
+                                                    <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                                        <label for="username" style="margin-bottom: 10px;"> E-mail: </label>                      
+                                                        <label for="pw" style="margin-bottom: 10px;"> Password: </label>
+                                                    </p>
+                                                    
+                                                    <p class="FormDivide" style="justify-content: center;">
+                                                        <input type="text" name="E-mail" id="username" style="margin-bottom: 10px;"> 
+                                                        <input type="password" id="pw" name="Password" style="margin-bottom: 10px;"> 
+                                                    </p>
+                                                </div>
+                                                
+                                                <div>
+                                                    <p style="color: #DC143C">Falsches Passwort: Bitte erneut verusuchen oder zurücksetzen</p>
+                                                </div>
+                                                
+                                                <div>
+                                                    <input type="submit" Value="Login" name="subm1" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                                </div>
+                                                
+                                                <div>
+                                                    <p onclick="openDirectory(event, 'Register', 'FirstPage')"> Register -> </p>
+                                                </div>
+                                                
+                                                <div>
+                                                    <a href=""><p> Passwort vergessen? -> </p></a>
+                                                </div>
+                                                    
+                                            
+                                            </form>
+                                        </div>      
+    <?php
+                    }
+                
+            }
+            else{
+    ?>
+                                
+
+                                <div id="Login" class="tabcontent">
+                                    <form action="SomyimBooking.php" method="Post">
+                                        
+                                        <div class="DivideConc">
+                                            <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                                <label for="username" style="margin-bottom: 10px;"> E-mail: </label>                      
+                                                <label for="pw" style="margin-bottom: 10px;"> Password: </label>
+                                            </p>
+                                            
+                                            <p class="FormDivide" style="justify-content: center;">
+                                                <input type="text" name="E-mail" id="username" style="margin-bottom: 10px;"> 
+                                                <input type="password" id="pw" name="Password" style="margin-bottom: 10px;"> 
+                                            </p>
+                                        </div>
+                                        
+                                        <div>
+                                            <p style="color: #DC143C">Ungültige oder fehlende Eingaben: Bitte erneut versuchen</p>
+                                        </div>
+                                        
+                                        <div>
+                                            <input type="submit" Value="Login" name="subm1" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                        </div>
+                                        
+                                        <div>
+                                            <p onclick="openDirectory(event, 'Register', 'FirstPage')"> Register -> </p>
+                                        </div>
+                                        
+                                        <div>
+                                            <a href=""><p> Passwort vergessen? -> </p></a>
+                                        </div>
+                                            
+                                    
+                                    </form>
+                                </div>
+                                    
+    <?php
+            }
+        
+    }
+    else{
+?>
+
+                <div id="Login" class="tabcontent">
+                    <form action="SomyimSelection.html" method="Post">
+                        
+                        <div class="DivideConc">
+                            <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                <label for="username" style="margin-bottom: 10px;"> E-mail: </label>                      
+                                <label for="pw" style="margin-bottom: 10px;"> Password: </label>
+                            </p>
+                            
+                            <p class="FormDivide" style="justify-content: center;">
+<?php
+                        if(isset($_SESSION['LoginEmail'])){
+                            $SessionEmail = $_SESSION['LoginEmail'];
+                             echo"<input type='text' name='E-mail' id='username' value=$SessionEmail style='margin-bottom: 10px;'> ";
+                        }
+                        else{
+                            echo"<input type='text' name='E-mail' id='username' style='margin-bottom: 10px;'> ";
+                        }
+                        if(isset($_SESSION['PassSave'])){
+                            if (isset($_SESSION['LoginPassword'])){
+                                $TempPassw = $_SESSION['LoginPassword'];
+                                echo" <input type='password' id='pw' name='Password' value=$TempPassw style='margin-bottom: 10px;'> ";
+                            }
+                            else{
+                                echo" <input type='password' id='pw' name='Password' style='margin-bottom: 10px;'> ";
+                            }
+                        }
+                        else{
+                            echo" <input type='password' id='pw' name='Password' style='margin-bottom: 10px;'> ";
+                        }
+?>
+                            </p>
+                        </div>
+                        <div>
+<?php
+                        if(isset($_SESSION['PassSave'])){
+                            echo"
+                                <label for='savePW'>Would you like to save you Password?</label>
+                                <input type='radiobutton' id='savePW' name='SavePassword' value='SavePassword' checked>
+                            ";
+                        }
+                        else{
+                            echo"
+                            <label for='savePW'>Would you like to save you Password?</label>
+                            <input type='radiobutton' id='savePW' name='SavePassword' value='SavePassword'>
+                            ";
+                        }
+?>
+                        </div>
+
+                        <div>
+                            <input type="submit" Value="Login" name="subm1" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                        </div>
+                        
+                        <div>
+                            <p onclick="openDirectory(event, 'Register', 'FirstPage')"> Register -> </p>
+                        </div>
+                        
+                        <div>
+                            <a href=""><p> Passwort vergessen? -> </p></a>
+                        </div>
+                            
+                    
+                    </form>
+                </div>
+<?php
+    }
+?>

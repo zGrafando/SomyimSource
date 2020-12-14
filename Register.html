@@ -1,0 +1,929 @@
+<?php
+    if(!isset($_COOKIE['PHPSESSID'])){
+        session_start();    //start the session
+    }
+
+    if(isset($_POST['subm2'])){
+        if(!empty($_POST['Fname']) && !empty($_POST['Lname']) && !empty($_POST['Email']) && !empty($_POST['Phone']) && !empty($_POST['Street']) 
+            && !empty($_POST['Street']) && !empty($_POST['Number']) && !empty($_POST['Area']) && !empty($_POST['PostalCode']) && !empty($_POST['Password1']) && !empty($_POST['Password2']) || isset($_SESSION['Activation'])){
+            
+            if(isset($_POST['Fname']) && !empty($_POST['Fname'])){
+                $_SESSION['RegFirstName'] = htmlentities(filter_var($_POST['Fname'], FILTER_SANITIZE_STRING));
+            }
+            if(isset($_POST['Lname']) && !empty($_POST['Lname'])){
+                $_SESSION['RegLastName'] = htmlentities(filter_var($_POST['Lname'], FILTER_SANITIZE_STRING));
+            }
+            if(isset($_POST['Email']) && !empty($_POST['Email'])){
+                $_SESSION['RegEmail'] = htmlentities(filter_var($_POST['Email'], FILTER_SANITIZE_EMAIL));
+            }
+            if(isset($_POST['Phone']) && !empty($_POST['Phone'])){
+                $_SESSION['RegPhone'] = htmlentities(filter_var($_POST['Phone'], FILTER_SANITIZE_NUMBER_INT));
+            }
+            if(isset($_POST['Street']) && !empty($_POST['Street'])){
+                $_SESSION['RegStreet'] = htmlentities(filter_var($_POST['Street'], FILTER_SANITIZE_STRING));
+            }
+            if(isset($_POST['Number']) && !empty($_POST['Number'])){
+                $_SESSION['RegNumber'] = htmlentities(filter_var($_POST['Number'], FILTER_SANITIZE_NUMBER_INT));
+            } 
+            if(isset($_POST['Area']) && !empty($_POST['Area'])){
+                $_SESSION['RegArea'] = htmlentities(filter_var($_POST['Area'], FILTER_SANITIZE_STRING));
+            }
+            if(isset($_POST['PostalCode']) && !empty($_POST['PostalCode'])){
+                $_SESSION['RegPostalCode'] = htmlentities(filter_var($_POST['PostalCode'], FILTER_SANITIZE_NUMBER_INT));
+            }
+            
+            if ($_POST['Password1'] != $_POST['Password2']){
+                            
+?>
+                        <div id="Register" class="tabcontent">
+                            <form action="SomyimBooking.php" method="Post">
+                            
+                                <div class="DivideConc">
+                                    <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                        <label for="firstname" style="margin-bottom: 10px;"> First name: </label>
+                                        <label for="lastname" style="margin-bottom: 10px;"> Last name: </label>
+                                        <label for="email" style="margin-bottom: 10px;"> E-mail: </label>
+                                        <label for="telnr" style="margin-bottom: 10px;"> Telefon: </label>
+                                        <label for="strasse" style="margin-bottom: 10px;"> Strassenname: </label>
+                                        <label for="numm" style="margin-bottom: 10px;"> Hausnummer: </label>
+                                        <label for="WO" style="margin-bottom: 10px;"> Wohnort: </label>
+                                        <label for="PLZ" style="margin-bottom: 10px;"> PLZ: </label>
+                                        <label for="pw1" style="margin-bottom: 10px;"> Password: </label>
+                                        <label for="pw2" style="margin-bottom: 10px;"> Confirm Password: </label>
+                                    </p>
+                                    
+                                    <p class="FormDivide" style="justify-content: center;">
+<?php
+                                                if(isset($_SESSION['TempRegFirstName'])){
+                                                    $SessionFirstName = $_SESSION['TempRegFirstName'];
+                                                    echo" <input type='text' name='Fname' id='firstname' value=$SessionFirstName style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='text' name='Fname' id='firstname' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'First name' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegLastName'])){
+                                                    $SessionLastName = $_SESSION['TempRegLastName'];
+                                                    echo" <input type='text' name='Lname' id='lastname' value=$SessionLastName style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo"<input type='text' name='Lname' id='lastname' style='margin-bottom: 10px;'> <br>";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Last name' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegEmail'])){
+                                                    $SessionEmail = $_SESSION['TempRegEmail'];
+                                                    echo" <input type='email' name='Email' id='email' value=$SessionEmail style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='email' name='Email' id='email' placeholder='example@smth.com' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Email' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegPhone'])){
+                                                    $SessionPhone = $_SESSION['TempRegPhone'];
+                                                    echo" <input type='tel' name='Phone' id='telnr' value=$SessionPhone pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='tel' name='Phone' id='telnr' placeholder='+41 79 554 3142' pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Phone' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegStreet'])){
+                                                    $SessionStreet = $_SESSION['TempRegStreet'];
+                                                    echo" <input type='text' name='Street' id='strasse' value=$SessionStreet style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='text' name='Street' id='strasse' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Street' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegNumber'])){
+                                                    $SessionNumber = $_SESSION['TempRegNumber'];
+                                                    echo" <input type='number' name='Number' id='numm' value=$SessionNumber style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='number' name='Number' id='numm' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Number' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegArea'])){
+                                                    $SessionArea = $_SESSION['TempRegArea'];
+                                                    echo" <input type='text' name='Area' id='WO' value=$SessionArea style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='text' name='Area' id='WO' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Area' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegPostalCode'])){
+                                                    $SessionPostalCode = $_SESSION['TempRegPostalCode'];
+                                                    echo" <input type='number' name='PostalCode' id='PLZ' value=$SessionPostalCode style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='number' name='PostalCode' id='PLZ' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Postal Code' Attribute</p> ";
+                                                }
+?>
+                                                    <input type="password" name="Password1" id="pw1" style="margin-bottom: 10px;"> <br>
+                                                    <input type="password" name="Password2" id="pw2" style="margin-bottom: 10px;"> <br>
+                                                </p>
+                                            </div>
+                                
+                                <div>
+                                    <p style="color: #DC143C">Passwörter stimmen nicht überein: Bitte nochmals versuchen</p>
+                                </div>
+                                
+                                <div>
+                                    <input type="submit" Value="Register" name="subm2" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                </div>
+                                
+                                <div>
+                                    <p onclick="openDirectory(event, 'Login', 'FirstPage')"> <- Login </p>
+                                </div>
+                            
+                            </form>
+                        </div>
+<?php
+            }
+            else{
+            
+            
+                //Database Commit for registration
+                                    
+                $dbServername = "localhost";
+                $dbUsername = "zGrafando";
+                $dbPassword = "Nbiwe!12";
+                $dbName = "SomyimData";
+                
+                $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+                
+                if ($conn -> connect_error){
+                    die("Connection to Database failed: ". $conn -> connect_error);
+                }
+                $EmailExistsQuerry = $_SESSION['RegEmail'];
+                
+                $query = $conn->prepare("SELECT * FROM Kundendaten WHERE KundenEmail = '$EmailExistsQuerry' "); 
+                $query->execute();
+                $r = $query->get_result(); 
+                $result = $r->fetch_array(MYSQLI_ASSOC);
+                mysqli_close($conn); 
+                
+                if (isset($_SESSION['DatabaseFlag']) && $_SESSION['DatabaseFlag'] == 1){
+                    //popup: You have already registered
+                    
+
+    ?>
+                                       <div id="Register" class="tabcontent">
+                                            <form action="SomyimBooking.php" method="Post">
+                                            
+                                                <div class="DivideConc">
+                                                    <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                                        <label for="firstname" style="margin-bottom: 10px;"> First name: </label>
+                                                        <label for="lastname" style="margin-bottom: 10px;"> Last name: </label>
+                                                        <label for="email" style="margin-bottom: 10px;"> E-mail: </label>
+                                                        <label for="telnr" style="margin-bottom: 10px;"> Telefon: </label>
+                                                        <label for="strasse" style="margin-bottom: 10px;"> Strassenname: </label>
+                                                        <label for="numm" style="margin-bottom: 10px;"> Hausnummer: </label>
+                                                        <label for="WO" style="margin-bottom: 10px;"> Wohnort: </label>
+                                                        <label for="PLZ" style="margin-bottom: 10px;"> PLZ: </label>
+                                                        <label for="pw1" style="margin-bottom: 10px;"> Password: </label>
+                                                        <label for="pw2" style="margin-bottom: 10px;"> Password Confirm: </label>
+                                                    </p>
+                                                    
+                                                    <p class="FormDivide" style="justify-content: center;">
+    <?php
+                                                    if(isset($_SESSION['TempRegFirstName'])){
+                                                        $SessionFirstName = $_SESSION['TempRegFirstName'];
+                                                        echo" <input type='text' name='Fname' id='firstname' value=$SessionFirstName style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Fname' id='firstname' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'First name' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegLastName'])){
+                                                        $SessionLastName = $_SESSION['TempRegLastName'];
+                                                        echo" <input type='text' name='Lname' id='lastname' value=$SessionLastName style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo"<input type='text' name='Lname' id='lastname' style='margin-bottom: 10px;'> <br>";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Last name' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegEmail'])){
+                                                        $SessionEmail = $_SESSION['TempRegEmail'];
+                                                        echo" <input type='email' name='Email' id='email' value=$SessionEmail style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='email' name='Email' id='email' placeholder='example@smth.com' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Email' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegPhone'])){
+                                                        $SessionPhone = $_SESSION['TempRegPhone'];
+                                                        echo" <input type='tel' name='Phone' id='telnr' value=$SessionPhone pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='tel' name='Phone' id='telnr' placeholder='+41 79 554 3142' pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Phone' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegStreet'])){
+                                                        $SessionStreet = $_SESSION['TempRegStreet'];
+                                                        echo" <input type='text' name='Street' id='strasse' value=$SessionStreet style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Street' id='strasse' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Street' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegNumber'])){
+                                                        $SessionNumber = $_SESSION['TempRegNumber'];
+                                                        echo" <input type='number' name='Number' id='numm' value=$SessionNumber style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='Number' id='numm' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Number' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegArea'])){
+                                                        $SessionArea = $_SESSION['TempRegArea'];
+                                                        echo" <input type='text' name='Area' id='WO' value=$SessionArea style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Area' id='WO' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Area' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegPostalCode'])){
+                                                        $SessionPostalCode = $_SESSION['TempRegPostalCode'];
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' value=$SessionPostalCode style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Postal Code' Attribute</p> ";
+                                                    }
+    ?>
+                                                        <input type="password" name="Password1" id="pw1" style="margin-bottom: 10px;"> <br>
+                                                        <input type="password" name="Password2" id="pw2" style="margin-bottom: 10px;"> <br>
+                                                    </p>
+                                                </div>
+                                                
+                                                <div>
+                                                    <input type="submit" Value="Register" name="subm2" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                                </div>
+                                                
+                                                <div>
+                                                    <p onclick="openDirectory(event, 'Login', 'FirstPage')"> <- Login </p>
+                                                </div>
+                                            
+                                            </form>
+                                        </div>
+    <?php
+                }
+                else{
+                    if(!isset($result)){
+                        $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+                        if ($conn -> connect_error){
+                            die("Connection to Database failed: ". $conn -> connect_error);
+                        }
+                        $HashedPassword = password_hash($_POST['Password1'],PASSWORD_DEFAULT);
+                        
+                        $TempRegFirstName = $_SESSION['RegFirstName'];
+                        $TempRegLastName = $_SESSION['RegLastName'];
+                        $TempRegEmail = $_SESSION['RegEmail'];
+                        $TempRegPhone = $_SESSION['RegPhone'];
+                        $TempRegStreet = $_SESSION['RegStreet'];
+                        $TempRegNumber = $_SESSION['RegNumber'];
+                        $TempRegArea = $_SESSION['RegArea'];
+                        $TempRegPostalCode = $_SESSION['RegPostalCode'];
+                        
+                        $sql = "INSERT INTO Kundendaten(KundenVorname, KundenNachname, KundenEmail, KundenTelnr, KundenStrasse, KundenNummer, KundenWohnort, KundenPostleitzahl, KundenPasswort)
+                                VALUES('$TempRegFirstName', '$TempRegLastName', '$TempRegEmail', '$TempRegPhone', '$TempRegStreet', '$TempRegNumber', '$TempRegArea', '$TempRegPostalCode', '$HashedPassword')";
+                                
+                        if (mysqli_multi_query($conn, $sql)){
+                            //popup: Your registration has been successful -> Continue?
+                            $_SESSION['RegFirstName'] = "";
+                            $_SESSION['RegLastName'] = "";
+                            $_SESSION['RegEmail'] = "";
+                            $_SESSION['RegPhone'] = "";
+                            $_SESSION['RegStreet'] = "";
+                            $_SESSION['RegNumber'] = "";
+                            $_SESSION['RegArea'] = "";
+                            $_SESSION['RegPostalCode'] = "";
+                            $_SESSION['DatabaseFlag'] = 1;
+                            
+                            
+                            
+                            
+    ?>
+                                      <div id="Register" class="tabcontent">
+                                            <form action="SomyimBooking.php" method="Post">
+                                                    
+                                                <div class="DivideConc">
+                                                    <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                                        <label for="firstname" style="margin-bottom: 10px;"> First name: </label>
+                                                        <label for="lastname" style="margin-bottom: 10px;"> Last name: </label>
+                                                        <label for="email" style="margin-bottom: 10px;"> E-mail: </label>
+                                                        <label for="telnr" style="margin-bottom: 10px;"> Telefon: </label>
+                                                        <label for="strasse" style="margin-bottom: 10px;"> Strassenname: </label>
+                                                        <label for="numm" style="margin-bottom: 10px;"> Hausnummer: </label>
+                                                        <label for="WO" style="margin-bottom: 10px;"> Wohnort: </label>
+                                                        <label for="PLZ" style="margin-bottom: 10px;"> PLZ: </label>
+                                                        <label for="pw1" style="margin-bottom: 10px;"> Password: </label>
+                                                        <label for="pw2" style="margin-bottom: 10px;"> Password Confirm: </label>
+                                                    </p>
+                                                    
+                                                    <p class="FormDivide" style="justify-content: center;">
+    <?php
+                                                    if(isset($_SESSION['TempRegFirstName'])){
+                                                        $SessionFirstName = $_SESSION['TempRegFirstName'];
+                                                        echo" <input type='text' name='Fname' id='firstname' value=$SessionFirstName style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Fname' id='firstname' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'First name' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegLastName'])){
+                                                        $SessionLastName = $_SESSION['TempRegLastName'];
+                                                        echo" <input type='text' name='Lname' id='lastname' value=$SessionLastName style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo"<input type='text' name='Lname' id='lastname' style='margin-bottom: 10px;'> <br>";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Last name' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegEmail'])){
+                                                        $SessionEmail = $_SESSION['TempRegEmail'];
+                                                        echo" <input type='email' name='Email' id='email' value=$SessionEmail style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='email' name='Email' id='email' placeholder='example@smth.com' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Email' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegPhone'])){
+                                                        $SessionPhone = $_SESSION['TempRegPhone'];
+                                                        echo" <input type='tel' name='Phone' id='telnr' value=$SessionPhone pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='tel' name='Phone' id='telnr' placeholder='+41 79 554 3142' pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Phone' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegStreet'])){
+                                                        $SessionStreet = $_SESSION['TempRegStreet'];
+                                                        echo" <input type='text' name='Street' id='strasse' value=$SessionStreet style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Street' id='strasse' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Street' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegNumber'])){
+                                                        $SessionNumber = $_SESSION['TempRegNumber'];
+                                                        echo" <input type='number' name='Number' id='numm' value=$SessionNumber style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='Number' id='numm' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Number' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegArea'])){
+                                                        $SessionArea = $_SESSION['TempRegArea'];
+                                                        echo" <input type='text' name='Area' id='WO' value=$SessionArea style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Area' id='WO' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Area' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegPostalCode'])){
+                                                        $SessionPostalCode = $_SESSION['TempRegPostalCode'];
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' value=$SessionPostalCode style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Postal Code' Attribute</p> ";
+                                                    }
+    ?>
+                                                        <input type="password" name="Password1" id="pw1" style="margin-bottom: 10px;"> <br>
+                                                        <input type="password" name="Password2" id="pw2" style="margin-bottom: 10px;"> <br>
+                                                    </p>
+                                                </div>
+                                                
+                                                <div>
+                                                    <input type="submit" Value="Register" name="subm2" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                                </div>
+                                                
+                                                <div>
+                                                    <p onclick="openDirectory(event, 'Login', 'FirstPage')"> <- Login </p>
+                                                </div>
+                                            
+                                            </form>
+                                        </div>
+    <?php
+                            mysqli_close($conn);
+                        }
+                        else{
+                            // popuP: Registration was not successful : Please try another time -> Continue?
+    ?>
+                                      <div id="Register" class="tabcontent">
+                                            <form action="SomyimBooking.php" method="Post">
+                                            
+                                                <div class="DivideConc">
+                                                    <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                                        <label for="firstname" style="margin-bottom: 10px;"> First name: </label>
+                                                        <label for="lastname" style="margin-bottom: 10px;"> Last name: </label>
+                                                        <label for="email" style="margin-bottom: 10px;"> E-mail: </label>
+                                                        <label for="telnr" style="margin-bottom: 10px;"> Telefon: </label>
+                                                        <label for="strasse" style="margin-bottom: 10px;"> Strassenname: </label>
+                                                        <label for="numm" style="margin-bottom: 10px;"> Hausnummer: </label>
+                                                        <label for="WO" style="margin-bottom: 10px;"> Wohnort: </label>
+                                                        <label for="PLZ" style="margin-bottom: 10px;"> PLZ: </label>
+                                                        <label for="pw1" style="margin-bottom: 10px;"> Password: </label>
+                                                        <label for="pw2" style="margin-bottom: 10px;"> Password Confirm: </label>
+                                                    </p>
+                                                    
+                                                    <p class="FormDivide" style="justify-content: center;">
+    <?php
+                                                    if(isset($_SESSION['TempRegFirstName'])){
+                                                        $SessionFirstName = $_SESSION['TempRegFirstName'];
+                                                        echo" <input type='text' name='Fname' id='firstname' value=$SessionFirstName style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Fname' id='firstname' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'First name' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegLastName'])){
+                                                        $SessionLastName = $_SESSION['TempRegLastName'];
+                                                        echo" <input type='text' name='Lname' id='lastname' value=$SessionLastName style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo"<input type='text' name='Lname' id='lastname' style='margin-bottom: 10px;'> <br>";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Last name' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegEmail'])){
+                                                        $SessionEmail = $_SESSION['TempRegEmail'];
+                                                        echo" <input type='email' name='Email' id='email' value=$SessionEmail style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='email' name='Email' id='email' placeholder='example@smth.com' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Email' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegPhone'])){
+                                                        $SessionPhone = $_SESSION['TempRegPhone'];
+                                                        echo" <input type='tel' name='Phone' id='telnr' value=$SessionPhone pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='tel' name='Phone' id='telnr' placeholder='+41 79 554 3142' pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Phone' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegStreet'])){
+                                                        $SessionStreet = $_SESSION['TempRegStreet'];
+                                                        echo" <input type='text' name='Street' id='strasse' value=$SessionStreet style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Street' id='strasse' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Street' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegNumber'])){
+                                                        $SessionNumber = $_SESSION['TempRegNumber'];
+                                                        echo" <input type='number' name='Number' id='numm' value=$SessionNumber style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='Number' id='numm' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Number' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegArea'])){
+                                                        $SessionArea = $_SESSION['TempRegArea'];
+                                                        echo" <input type='text' name='Area' id='WO' value=$SessionArea style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Area' id='WO' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Area' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegPostalCode'])){
+                                                        $SessionPostalCode = $_SESSION['TempRegPostalCode'];
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' value=$SessionPostalCode style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Postal Code' Attribute</p> ";
+                                                    }
+    ?>
+                                                        <input type="password" name="Password1" id="pw1" style="margin-bottom: 10px;"> <br>
+                                                        <input type="password" name="Password2" id="pw2" style="margin-bottom: 10px;"> <br>
+                                                    </p>
+                                                </div>
+                                                
+                                                <div>
+                                                    <input type="submit" Value="Register" name="subm2" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                                </div>
+                                                
+                                                <div>
+                                                    <p onclick="openDirectory(event, 'Login', 'FirstPage')"> <- Login </p>
+                                                </div>
+                                            
+                                            </form>
+                                        </div>
+    <?php
+                        }
+                    }
+                    else{
+                        //popup: This email was already used for an alternate account - pls make sure you are using your own mail-adress
+    ?>
+                                      <div id="Register" class="tabcontent">
+                                            <form action="SomyimBooking.php" method="Post">
+                                            
+                                                <div class="DivideConc">
+                                                    <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                                        <label for="firstname" style="margin-bottom: 10px;"> First name: </label>
+                                                        <label for="lastname" style="margin-bottom: 10px;"> Last name: </label>
+                                                        <label for="email" style="margin-bottom: 10px;"> E-mail: </label>
+                                                        <label for="telnr" style="margin-bottom: 10px;"> Telefon: </label>
+                                                        <label for="strasse" style="margin-bottom: 10px;"> Strassenname: </label>
+                                                        <label for="numm" style="margin-bottom: 10px;"> Hausnummer: </label>
+                                                        <label for="WO" style="margin-bottom: 10px;"> Wohnort: </label>
+                                                        <label for="PLZ" style="margin-bottom: 10px;"> PLZ: </label>
+                                                        <label for="pw1" style="margin-bottom: 10px;"> Password: </label>
+                                                        <label for="pw2" style="margin-bottom: 10px;"> Password Confirm: </label>
+                                                    </p>
+                                                    
+                                                    <p class="FormDivide" style="justify-content: center;">
+    <?php
+                                                    if(isset($_SESSION['TempRegFirstName'])){
+                                                        $SessionFirstName = $_SESSION['TempRegFirstName'];
+                                                        echo" <input type='text' name='Fname' id='firstname' value=$SessionFirstName style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Fname' id='firstname' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'First name' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegLastName'])){
+                                                        $SessionLastName = $_SESSION['TempRegLastName'];
+                                                        echo" <input type='text' name='Lname' id='lastname' value=$SessionLastName style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo"<input type='text' name='Lname' id='lastname' style='margin-bottom: 10px;'> <br>";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Last name' Attribute</p> ";
+                                                    }
+                                                    
+                                                        echo" <input type='email' name='Email' id='email' style='margin-bottom: 10px;'> <br> ";
+                                                        
+                                                    if(isset($_SESSION['TempRegPhone'])){
+                                                        $SessionPhone = $_SESSION['TempRegPhone'];
+                                                        echo" <input type='tel' name='Phone' id='telnr' value=$SessionPhone pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='tel' name='Phone' id='telnr' placeholder='+41 79 554 3142' pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Phone' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegStreet'])){
+                                                        $SessionStreet = $_SESSION['TempRegStreet'];
+                                                        echo" <input type='text' name='Street' id='strasse' value=$SessionStreet style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Street' id='strasse' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Street' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegNumber'])){
+                                                        $SessionNumber = $_SESSION['TempRegNumber'];
+                                                        echo" <input type='number' name='Number' id='numm' value=$SessionNumber style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='Number' id='numm' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Number' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegArea'])){
+                                                        $SessionArea = $_SESSION['TempRegArea'];
+                                                        echo" <input type='text' name='Area' id='WO' value=$SessionArea style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Area' id='WO' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Area' Attribute</p> ";
+                                                    }
+                                                    if(isset($_SESSION['TempRegPostalCode'])){
+                                                        $SessionPostalCode = $_SESSION['TempRegPostalCode'];
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' value=$SessionPostalCode style='margin-bottom: 10px;'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' style='margin-bottom: 10px;'> <br> ";
+                                                        echo" <p style='color: #DC143C '>missing or invalid input for 'Postal Code' Attribute</p> ";
+                                                    }
+    ?>
+                                                        <input type="password" name="Password1" id="pw1" style="margin-bottom: 10px;"> <br>
+                                                        <input type="password" name="Password2" id="pw2" style="margin-bottom: 10px;"> <br>
+                                                    </p>
+                                                </div>
+                                                
+                                                <div>
+                                                    <input type="submit" Value="Register" name="subm2" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                                </div>
+                                                
+                                                <div>
+                                                    <p onclick="openDirectory(event, 'Login', 'FirstPage')"> <- Login </p>
+                                                </div>
+                                            
+                                            </form>
+                                        </div>
+    <?php
+                    }
+                }
+                }
+            }
+            else{
+                if(isset($_POST['Fname'])){
+                    $_SESSION['TempRegFirstName'] = htmlentities(filter_var($_POST['Fname'], FILTER_SANITIZE_STRING));
+                }
+                if(isset($_POST['Lname'])){
+                    $_SESSION['TempRegLastName'] = htmlentities(filter_var($_POST['Lname'], FILTER_SANITIZE_STRING));
+                }
+                if(isset($_POST['Email'])){
+                    $_SESSION['TempRegEmail'] = htmlentities(filter_var($_POST['Email'], FILTER_SANITIZE_EMAIL));
+                }
+                if(isset($_POST['Phone'])){
+                    $_SESSION['TempRegPhone'] = htmlentities(filter_var($_POST['Phone'], FILTER_SANITIZE_NUMBER_INT));
+                }
+                if(isset($_POST['Street'])){
+                    $_SESSION['TempRegStreet'] = htmlentities(filter_var($_POST['Street'], FILTER_SANITIZE_STRING));
+                }
+                if(isset($_POST['Number'])){
+                    $_SESSION['TempRegNumber'] = htmlentities(filter_var($_POST['Number'], FILTER_SANITIZE_NUMBER_INT));
+                }
+                if(isset($_POST['Area'])){
+                    $_SESSION['TempRegArea'] = htmlentities(filter_var($_POST['Area'], FILTER_SANITIZE_STRING));
+                }
+                if(isset($_POST['PostalCode'])){
+                    $_SESSION['TempRegPostalCode'] = htmlentities(filter_var($_POST['PostalCode'], FILTER_SANITIZE_NUMBER_INT));
+                }
+
+?>
+                                   <div id="Register" class="tabcontent">
+                                        <form action="SomyimBooking.php" method="Post">
+                                        
+                                            <div class="DivideConc">
+                                                <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                                    <label for="firstname" style="margin-bottom: 10px;"> First name: </label>
+                                                    <label for="lastname" style="margin-bottom: 10px;"> Last name: </label>
+                                                    <label for="email" style="margin-bottom: 10px;"> E-mail: </label>
+                                                    <label for="telnr" style="margin-bottom: 10px;"> Telefon: </label>
+                                                    <label for="strasse" style="margin-bottom: 10px;"> Strassenname: </label>
+                                                    <label for="numm" style="margin-bottom: 10px;"> Hausnummer: </label>
+                                                    <label for="WO" style="margin-bottom: 10px;"> Wohnort: </label>
+                                                    <label for="PLZ" style="margin-bottom: 10px;"> PLZ: </label>
+                                                    <label for="pw1" style="margin-bottom: 10px;"> Password: </label>
+                                                    <label for="pw2" style="margin-bottom: 10px;"> Password Confirm: </label>
+                                                </p>
+                                                
+                                                <p class="FormDivide" style="justify-content: center;">
+<?php
+                                                if(isset($_SESSION['TempRegFirstName'])){
+                                                    $SessionFirstName = $_SESSION['TempRegFirstName'];
+                                                    echo" <input type='text' name='Fname' id='firstname' value=$SessionFirstName style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='text' name='Fname' id='firstname' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'First name' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegLastName'])){
+                                                    $SessionLastName = $_SESSION['TempRegLastName'];
+                                                    echo" <input type='text' name='Lname' id='lastname' value=$SessionLastName style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo"<input type='text' name='Lname' id='lastname' style='margin-bottom: 10px;'> <br>";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Last name' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegEmail'])){
+                                                    $SessionEmail = $_SESSION['TempRegEmail'];
+                                                    echo" <input type='email' name='Email' id='email' value=$SessionEmail style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='email' name='Email' id='email' placeholder='example@smth.com' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Email' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegPhone'])){
+                                                    $SessionPhone = $_SESSION['TempRegPhone'];
+                                                    echo" <input type='tel' name='Phone' id='telnr' value=$SessionPhone pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='tel' name='Phone' id='telnr' placeholder='+41 79 554 3142' pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Phone' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegStreet'])){
+                                                    $SessionStreet = $_SESSION['TempRegStreet'];
+                                                    echo" <input type='text' name='Street' id='strasse' value=$SessionStreet style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='text' name='Street' id='strasse' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Street' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegNumber'])){
+                                                    $SessionNumber = $_SESSION['TempRegNumber'];
+                                                    echo" <input type='number' name='Number' id='numm' value=$SessionNumber style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='number' name='Number' id='numm' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Number' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegArea'])){
+                                                    $SessionArea = $_SESSION['TempRegArea'];
+                                                    echo" <input type='text' name='Area' id='WO' value=$SessionArea style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='text' name='Area' id='WO' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Area' Attribute</p> ";
+                                                }
+                                                if(isset($_SESSION['TempRegPostalCode'])){
+                                                    $SessionPostalCode = $_SESSION['TempRegPostalCode'];
+                                                    echo" <input type='number' name='PostalCode' id='PLZ' value=$SessionPostalCode style='margin-bottom: 10px;'> <br> ";
+                                                }
+                                                else{
+                                                    echo" <input type='number' name='PostalCode' id='PLZ' style='margin-bottom: 10px;'> <br> ";
+                                                    echo" <p style='color: #DC143C '>missing or invalid input for 'Postal Code' Attribute</p> ";
+                                                }
+?>
+                                                    <input type="password" name="Password1" id="pw1" style="margin-bottom: 10px;"> <br>
+                                                    <input type="password" name="Password2" id="pw2" style="margin-bottom: 10px;"> <br>
+                                                </p>
+                                            </div>
+                                            
+                                            <div>
+                                                <input type="submit" Value="Register" name="subm2" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                            </div>
+                                            
+                                            <div>
+                                                <p onclick="openDirectory(event, 'Login', 'FirstPage')"> <- Login </p>
+                                            </div>
+                                        
+                                        </form>
+                                    </div>
+<?php
+        }
+    }
+    else{
+                         
+?>
+                                   <div id="Register" class="tabcontent">
+                                        <form action="SomyimBooking.php" method="Post">
+                                        
+                                            <div class="DivideConc">
+                                                <p class="FormDivide" style="width: 40%; flex-direction: column; text-align: right;">
+                                                    <label for="firstname" style="margin-bottom: 10px;"> First name: </label>
+                                                    <label for="lastname" style="margin-bottom: 10px;"> Last name: </label>
+                                                    <label for="email" style="margin-bottom: 10px;"> E-mail: </label>
+                                                    <label for="telnr" style="margin-bottom: 10px;"> Telefon: </label>
+                                                    <label for="strasse" style="margin-bottom: 10px;"> Strassenname: </label>
+                                                    <label for="numm" style="margin-bottom: 10px;"> Hausnummer: </label>
+                                                    <label for="WO" style="margin-bottom: 10px;"> Wohnort: </label>
+                                                    <label for="PLZ" style="margin-bottom: 10px;"> PLZ: </label>
+                                                    <label for="pw1" style="margin-bottom: 10px;"> Password: </label>
+                                                    <label for="pw2" style="margin:bottom:10px;"> Password Confirm: </label>
+                                                </p>
+<script>
+    function putFirstName(){
+        var gottenFirstName = document.getElementById('firstname').value;
+        document.cookie = "CookieFirstName = " + gottenFirstName;
+    }
+</script>
+
+<script>
+    function putLastName(){
+        var gottenLastName = document.getElementById('lastname').value;
+        document.cookie = "CookieLastName = " + gottenLastName;
+    }
+</script>
+
+<script>
+    function putEmail(){
+        var gottenEmail = document.getElementById('email').value;
+        document.cookie = "CookieEmail = " + gottenEmail;
+    }
+</script>
+
+<script>
+    function putPhone(){
+        var gottenPhone = document.getElementById('telnr').value;
+        document.cookie = "CookiePhone = " + gottenPhone;
+    }
+</script>
+
+<script>
+    function putStreet(){
+        var gottenStreet = document.getElementById('strasse').value;
+        document.cookie = "CookieStreet = " + gottenStreet;
+    }
+</script>
+
+<script>
+    function putNumber(){
+        var gottenNumber = document.getElementById('numm').value;
+        document.cookie = "CookieNumber = " + gottenNumber;
+    }
+</script>
+
+<script>
+    function putArea(){
+        var gottenArea = document.getElementById('WO').value;
+        document.cookie = "CookieArea = " + gottenArea;
+    }
+</script>
+
+<script>
+    function putPostalCode(){
+        var gottenPostalCode = document.getElementById('PLZ').value;
+        document.cookie = "CookiePostalCode = " + gottenPostalCode;
+    }
+</script>
+                                                
+                                                <p class="FormDivide" style="justify-content: center;">
+<?php
+                                                    if(isset($_SESSION['ProvRegFirstName']) && !empty($_SESSION['ProvRegFirstName'])){
+                                                        $ProvFirstName = htmlentities(filter_var($_SESSION['ProvRegFirstName'], FILTER_SANITIZE_STRING));
+                                                        echo" <input type='text' name='Fname' id='firstname' value=$ProvFirstName style='margin-bottom: 10px;' onChange='putFirstName()'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Fname' id='firstname' style='margin-bottom: 10px;' onChange='putFirstName()'> <br> ";
+                                                        if (!empty($_COOKIE['CookieFirstName'])){
+                                                            $_SESSION['ProvRegFirstName'] = $_COOKIE['CookieFirstName'];
+                                                        }
+                                                    }
+                                                    if(isset($_SESSION['ProvRegLastName']) && !empty($_SESSION['ProvRegLastName'])){
+                                                        $ProvLastName = htmlentities(filter_var($_SESSION['ProvRegLastName'], FILTER_SANITIZE_STRING));
+                                                        echo" <input type='text' name='Lname' id='lastname' value=$ProvLastName style='margin-bottom: 10px;' onChange='putLastName()'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Lname' id='lastname' style='margin-bottom: 10px;' onChange='putLastName()'> <br> ";
+                                                        if (!empty($_COOKIE['CookieLastName'])){
+                                                            $_SESSION['ProvRegLastName'] = $_COOKIE['CookieLastName'];
+                                                        }
+                                                    }
+                                                    if(isset($_SESSION['ProvRegEmail']) && !empty($_SESSION['ProvRegEmail'])){
+                                                        $ProvEmail = htmlentities(filter_var($_SESSION['ProvRegEmail'], FILTER_SANITIZE_EMAIL));
+                                                        echo" <input type='email' name='Email' id='email' value=$ProvEmail style='margin-bottom: 10px;' onChange='putEmail()'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='email' name='Email' id='email' placeholder='example@smth.com' style='margin-bottom: 10px;' onChange='putEmail()'> <br> ";
+                                                        if(!empty($_COOKIE['CookieEmail'])){
+                                                            $_SESSION['ProvRegEmail'] = $_COOKIE['CookieEmail'];
+                                                        }
+                                                    }              
+                                                    if(isset($_SESSION['ProvRegPhone']) && !empty($_SESSION['ProvRegPhone'])){
+                                                        $ProvPhone = htmlentities(filter_var($_SESSION['ProvRegPhone'], FILTER_SANITIZE_NUMBER_INT));
+                                                        echo" <input type='tel' name='Phone' id='telnr' value=$ProvPhone pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;' onChange='putPhone()'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='tel' name='Phone' id='telnr' placeholder='+41 79 554 3142' pattern='+[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}' style='margin-bottom: 10px;' onChange='putPhone()'> <br> ";
+                                                        if(!empty($_COOKIE['CookiePhone'])){
+                                                            $_SESSION['ProvRegPhone'] = $_COOKIE['CookiePhone'];
+                                                        }
+                                                    }
+
+                                                    if(isset($_SESSION['ProvRegStreet']) && !empty($_SESSION['ProvRegStreet'])){
+                                                        $ProvStreet = htmlentities(filter_var($_SESSION['ProvRegStreet'], FILTER_SANITIZE_STRING));
+                                                        echo" <input type='text' name='Street' id='strasse'  value=$ProvStreet style='margin-bottom: 10px;' onChange='putStreet()'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Street' id='strasse' style='margin-bottom: 10px;' onChange='putStreet()'> <br> ";
+                                                        if(!empty($_COOKIE['CookieStreet'])){
+                                                            $_SESSION['ProvRegStreet'] = $_COOKIE['CookieStreet'];
+                                                        }
+                                                    }
+
+                                                    if(isset($_SESSION['ProvRegNumber']) && !empty($_SESSION['ProvRegNumber'])){
+                                                        $ProvNumber = htmlentities(filter_var($_SESSION['ProvRegNumber'], FILTER_SANITIZE_NUMBER_INT));
+                                                        echo" <input type='number' name='Number' id='numm' value=$ProvNumber style='margin-bottom: 10px;' onChange='putNumber()'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='Number' id='numm' style='margin-bottom: 10px;' onChange='putNumber()'> <br> ";
+                                                        if(!empty($_COOKIE['CookieNumber'])){
+                                                            $_SESSION['ProvRegNumber'] = $_COOKIE['CookieNumber'];
+                                                        }
+                                                    }
+
+                                                    if(isset($_SESSION['ProvRegArea']) && !empty($_SESSION['ProvRegArea'])){
+                                                        $ProvArea = htmlentities(filter_var($_SESSION['ProvRegArea'], FILTER_SANITIZE_STRING));
+                                                        echo" <input type='text' name='Area' id='WO' value=$ProvArea style='margin-bottom: 10px;' onChange='putArea()'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='text' name='Area' id='WO' style='margin-bottom: 10px;' onChange='putArea()'> <br> ";
+                                                        if(!empty($_COOKIE['CookieArea'])){
+                                                            $_SESSION['ProvRegArea'] = $_COOKIE['CookieArea'];
+                                                        }
+                                                    }
+     
+                                                    if(isset($_SESSION['ProvRegPostalCode']) && !empty($_SESSION['ProvRegPostalCode'])){
+                                                        $ProvPostalCode = htmlentities(filter_var($_SESSION['ProvRegPostalCode'], FILTER_SANITIZE_NUMBER_INT));
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' value=$ProvPostalCode style='margin-bottom: 10px;' onChange='putPostalCode()'> <br> ";
+                                                    }
+                                                    else{
+                                                        echo" <input type='number' name='PostalCode' id='PLZ' style='margin-bottom: 10px;' onChange='putPostalCode()'> <br> ";
+                                                        if(!empty($_COOKIE['CookiePostalCode'])){
+                                                            $_SESSION['ProvRegPostalCode'] = $_COOKIE['CookiePostalCode'];
+                                                        }
+                                                    }
+?>
+
+                                        
+                                                    <input type="password" name="Password1" id="pw1" style="margin-bottom: 10px;"> <br>
+                                                    <input type="password" name="Password2" id="pw2" style="margin-bottom: 10px;"> <br>
+                                                </p>
+                                            </div>
+                                            
+                                            
+                                            
+                                            <div>
+                                                <input type="submit" Value="Register" name="subm2" style="font-size: 25px; min-height: 50px; min-width: 150px;">
+                                            </div>
+                                            
+                                            <div>
+                                                <p onclick="openDirectory(event, 'Login', 'FirstPage')"> <- Login </p>
+                                            </div>
+                                        
+                                        </form>
+                                    </div>
+<?php
+    }
+?>

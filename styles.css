@@ -1,0 +1,608 @@
+@charset "utf-8";
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.titlesequenceTop {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px:
+}
+
+
+.titlesequenceTop a{
+    color: #FFFFF;
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titleSectionBackground{
+    background: -webkit-linear-gradient(90deg, #FFF8DC, #000000);
+
+}
+
+.titlesequenceTop a p:hover {
+    font-size: 150px;
+    color: #FFFFFF;
+}
+
+.titlesequenceScroll {
+    width: 100%;
+    height: 400px;
+    align-self: center;
+    text-align: center;
+}
+
+.titlesequenceScroll p {
+    color: #FFFFFF;
+    font-size: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center
+}
+
+.titlesequenceScroll p a:hover {
+    font-size: 125px;
+}
+
+.Navigation{
+    position: left;
+    float: center;
+    height: 100px;
+    align-self: center;
+    margin: auto;
+    justify-content: center;
+}
+
+.Navigation ul {
+    width: 100%;
+    float: center;
+    display: inline-block;
+    border-left: 1px;
+    border-right: 1px;
+    border-color: #FFFFFF;
+    align-self: center;
+    margin: auto;
+    
+}
+
+.Navigation ul li {
+    display: inline-block;
+    width : 19%;
+    height: 100%;
+    text-align: center;
+    float: center;
+    align-self: center;
+    border-left-style: groove;
+    border-color: #FFFFFF;
+}
+
+.Border{
+    border-right-style: groove;
+    border-color: #FFFFFF;
+}
+
+.Navigation ul li:hover{
+    font-size: 75px;
+    background-color: #696969;
+    color: #A08980;
+}
+
+.Navigation ul li a {
+    color: #FFFFFF;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    display: inline-block;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.FeedPic {
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 500px;
+    height: 500px;
+}
+
+.FeedPicBackground {
+    display: flex;
+    position: relative;
+    float: center;
+    align-self: center;
+    height: 500px;
+    width: 100%;
+    background-color: #FFF8DC;
+}
+
+.smth{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    float: center;
+    align-self: center;
+}
+
+.BodyBackground {
+    background-color: #080808;
+    width: 100%;
+    height: 100%;
+}
+
+.FeedSection {
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 100%;
+    height: 100%;
+}
+
+.FeedTopContainer {
+    background: -webkit-linear-gradient(270deg, #FFF8DC, #000000);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.FeedTopDivision {
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 1000px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.FeedTopBackground {
+    width: 100%;
+    height: 530px;
+    background-color: #000000;
+}
+
+.FeedTopLayout2 {
+    width: 100%;
+    height: 150px;
+    display: block;
+    text-align: center;
+}
+
+.FeedTopWhiteLayout2 {
+    font-size: 60px;
+    margin: auto;
+    color: #FFFFFF;
+    text-align: center;
+    float: left;
+    padding-left: 120px;
+
+}
+
+.FeedQuickLinkDivision {
+    background-color: #DAA520;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 1000px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.FeedPicDivision {
+    position: relativ;
+    float: center;
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+.FeedQuickLinkDivisionParagraph{
+    font-size: 60px;
+    color: #FFFFFF;
+}
+
+.FeedQuickLinkDivisionParagraph:hover{
+    font-size: 65px;
+    color: #800000;
+}
+
+.FeedPicOne {
+    margin-left: auto;
+    margin-right: auto;
+    float: center;
+    align-self: center;
+    position: relative;
+    height: 1000px;
+    width: 1000px;
+
+}
+
+.FeedPicOne2 {
+    height: 1000px;
+    width: 1000px;
+}
+
+.FeedTextDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.FeedTextDivision p{
+    font-size: 35px;
+}
+
+.FeedKredationDivision{
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.FeedKredationDivisionParagraph{
+    color: #DAA520;
+    font-size: 35px;
+}
+
+.FeedKredationDivision p{
+    font-size: 35px;
+}
+
+.FeedOpeningHoursDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+    text-align: center;
+    height: 1500px;
+}
+
+.FeedOpeningHoursDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedOpeningHoursDivision p a {
+    color: #DAA520;
+}
+
+.FeedCustomerFeedbackDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+    text-align: center;
+}
+
+.FeedCustomerFeedbackDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedDescriptionDivision {
+    background-color: #FFF8DC;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedDescriptionDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedDescriptionkDivision p a{
+    color: #DAA520;
+}
+
+.FeedAmbienteDivision{
+    background-color: #FFF8DC;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+    text-align: center;
+    display: block;
+    align-items: center;
+    position: relative;
+    float: center;
+
+}
+
+.rala{
+    font-size: 35px;
+    text-align: center;
+    float: center;
+    margin: auto;
+    align-self: center;
+    
+}
+
+.FeedPersuasionDivision{
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    text-align: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedPersuasionDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedAngebotDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedAngebotDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedKundenProgrammDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedKundenProgrammDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedKundenProgrammDivision p a{
+    color: #DAA520;
+}
+
+.FeedFirmenPartnerProgrammDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedFirmenPartnerProgrammDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedFirmenPartnerProgrammDivision p a{
+    color: #DAA520;
+}
+
+.FeedMemoryMitgliedDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    margin: auto;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedMemoryMitgliedDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedWellnessShopDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedWellnessShopDivision p{
+    align-self: center;
+    font-size: 35px;
+}
+
+.FeedGutscheinDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedGutscheinDivision p{
+    align-self: center;
+    font-size: 35px;    
+}
+
+.FeedGutscheinDivision p a{
+    color: #DAA520;
+}
+
+.FeedFooterDivision {
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 10px;
+    border-top: 2px;
+    border-color: #FF0F00;
+}
+
+.FeedFooterDivisionParagraph{
+    font-size: 65px;
+    align-self: center;
+}
+
+.FeedFooterDivisionParagraphSpan{
+    color: #DAA520;  
+}
+
+.Logo{
+    width: 200px;
+    height: 200px;
+}
+
+.UTSectionTitleParagraph{
+    font-size: 65px;
+    align-self: center;
+    color: #DAA520;
+}
+
+.UTContent{
+    width: 60%;
+    align-self: center;
+    background-color: #FFF8DC;
+    position: relative;
+    float: center;
+    margin: auto;
+}
+
+.UTContent p{
+    font-size: 35px;
+}
+
+.UTContent2{
+    width: 60%;
+    align-self: center;
+    background-color: #FFFFFF;
+    position: relative;
+    float: center;
+    margin: auto;
+}
+
+.UTContentParagraph{
+    font-size: 35px;
+    color: #000000;
+}
+
+.UTContentPic{
+    width: 500px;
+    height: 500px;
+    align-self: center;
+}
+
+.UTContentPic2{
+    width: 60%;
+    height: 1000px;
+    align-self: center;
+}
+
+.UTMap{
+    width: 60%;
+    align-self: center;
+    height: 1000px;
+}
+
+.UTContact{
+    color: #DAA520;
+    font-size: 40px;
+    align-self: center;
+}
+
+.UTGallery{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.UTGalleryPic{
+    width: 90%;
+    height: 600px;
+    align-self: center;
+}
+
+.finpic{
+    width: 80%;
+    height: 500px;
+}
+
+.FeedTopContainerService {
+    background: -webkit-linear-gradient(270deg, #000000, #FFF8DC);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.FormDivide{
+    display: flex;
+    flex-wrap: wrap;
+    width: 25%;
+    
+}
+
+.DivideConc{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row; 
+    max-width: 100%;
+    justify-content: center;
+    margin: auto;
+}
+
+.Calendar{
+    margin: auto;
+    min-width: 70%;
+    max-width: 70%;
+    background-color: #FFF8DC;
+}
+
+.TimeTableDesc{
+    text-align: center;
+    display: flex;
+    flex-direction: column
+}
+
+.TimeTableConc{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row; 
+    max-width: 100%;
+    max-height: 950px;
+}
+
